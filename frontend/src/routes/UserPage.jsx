@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 import { user } from "../endpoints/Api";
 
 const UserPage = () => {
-  const [user_Info, setUser_Info] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       const res = await user();
-      if (res) {
-        setUser_Info(res);
-      }
+      if (res) setUserData(res);
     };
-    
     fetchData();
   }, []);
-  
-  if (!user_Info) {
+
+  if (!userData) {
     return <div>Loading...</div>;
   }
 
@@ -26,18 +22,18 @@ const UserPage = () => {
       {/* Profile Section */}
       <div className="flex items-center mb-6">
         <img
-          src={user_Info.profile_pic || "https://via.placeholder.com/150"}
+          src={userData.profile_pic || "https://via.placeholder.com/150"}
           alt="Profile"
           className="w-32 h-32 rounded-full mr-6"
         />
         <div>
-          <h1 className="text-2xl font-bold">{user_Info.username}</h1>
+          <h1 className="text-2xl font-bold">{userData.username}</h1>
           <div className="flex space-x-6 mt-2">
             <span>2 posts</span>
             <span>201 followers</span>
             <span>48 following</span>
           </div>
-          <p className="mt-4">{user_Info.bio}</p>
+          <p className="mt-4">{userData.bio}</p>
         </div>
       </div>
 

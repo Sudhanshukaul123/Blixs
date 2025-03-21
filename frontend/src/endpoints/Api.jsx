@@ -15,7 +15,7 @@ const REGISTER = `${BASE_API}api/register/`;
 export const user = async () => {
   try {
     const response = await axios.get(USER_URL, { withCredentials: true });
-    console.log("User Info :  ", response.data);
+    console.log("User Data :  ", response.data);
     return response.data;
   } catch (error) {
     return call_refresh(
@@ -62,12 +62,8 @@ export const get_self_post = async () => {
 
 export const login_try = async (username, password) => {
   try {
-    const res = await axios.post(
-      LOGIN_URL,
-      { username, password },
-      { withCredentials: true }
-    );
-    return res.data.success;
+    const res = await axios.post(LOGIN_URL, { username, password });
+    return res.data;
   } catch (error) {
     console.error("Login API error:", error);
     return false;
