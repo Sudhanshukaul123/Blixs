@@ -34,7 +34,7 @@ class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
     caption = models.CharField(max_length=100)
-    image = ArrayField(models.ImageField(upload_to="posts/%Y/%m/%d/"), size=5 ,blank=True ,null=True)
+    image = models.JSONField(default=list, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True , db_index=True)
 
     def __str__(self):
